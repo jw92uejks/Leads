@@ -121,12 +121,6 @@ Acesse: http://localhost:8000
 
 ## 1.11. ⚠️ Erros Comuns
 
-### "Could not open input file: artisan"
-
-``` bash
-cd C:\laragon\www\mercadodeleads
-```
-
 ### Extensões faltando
 
 Adicionar no php.ini:
