@@ -123,7 +123,7 @@ Acesse: http://localhost:8000
 
 ### Extensões faltando
 
-Adicionar no php.ini:
+descomentar do php.ini:
 
     extension=mbstring
     extension=pdo_mysql
