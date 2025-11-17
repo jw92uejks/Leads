@@ -39,7 +39,7 @@ jobs:
             if [ ! -d ".git" ]; then
               echo "Pasta não existe ou não é um repo git. Limpando e clonando..."
               rm -rf /var/www/snakegame/*
-              git clone git@github.com:Corvaum/mercadodeleads.git .
+              git clone git@github.com:LM-OnDeal/mercadodeleads.git .
             else
               echo "Repo já existe. Atualizando..."
               git pull origin main
