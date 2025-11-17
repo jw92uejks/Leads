@@ -1,4 +1,4 @@
-# 📘 1.0 Instalação PHP + Extensões + Laravel + Breeze (for Windows)
+# 📘 1.0 Instalação PHP + Extensões + Laravel + Breeze (Windows)
 
 ## 1.1 ✔️ Verificar a instalação do PHP
 
