@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Configura SSH
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # Deploy via SSH no servidor
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
         with:
@@ -19,18 +28,25 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             # Cria pasta se não existir
-            mkdir -p /var/www/mercadodeleads
-            cd /var/www/mercadodeleads
+            mkdir -p /var/www/snakegame
+            cd /var/www/snakegame
 
-            # Adiciona GitHub ao known_hosts
+            # Adiciona GitHub ao known_hosts (por segurança)
             mkdir -p ~/.ssh
             ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-            # Clona ou atualiza o repositório
+            # Se não for um repo git, limpa a pasta e clona
             if [ ! -d ".git" ]; then
-              echo "Pasta não existe, clonando repo..."
+              echo "Pasta não existe ou não é um repo git. Limpando e clonando..."
+              rm -rf /var/www/snakegame/*
               git clone git@github.com:Corvaum/mercadodeleads.git .
             else
-              echo "Repo já existe, atualizando..."
+              echo "Repo já existe. Atualizando..."
               git pull origin main
             fi
+
+            # Scripts PHP comentados (descomente quando estiver pronto)
+            # cd /var/www/snakegame
+            # composer install --no-dev
+            # php artisan migrate --force
+            # php artisan optimize
