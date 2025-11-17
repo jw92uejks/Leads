@@ -10,28 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Configura SSH
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      # Clonar ou atualizar o repositório
-      - name: Git Clone / Pull
-        run: |
-          if [ ! -d "/var/www/mercadodeleads/.git" ]; then
-            echo "Pasta não existe ou não é um repo git. Clonando..."
-            git clone git@github.com:Corvaum/mercadodeleads.git /var/www/mercadodeleads
-          else
-            echo "Repo já existe. Atualizando..."
-            cd /var/www/mercadodeleads
-            git pull origin main
-          fi
-
-      # php scripts
-      - name: php scripts
+      # Deploy via SSH
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -39,6 +19,19 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            # Se a pasta não existir, cria e clona o repo
+            if [ ! -d "/var/www/mercadodeleads/.git" ]; then
+              echo "Pasta não existe, criando e clonando repo..."
+              mkdir -p /var/www/mercadodeleads
+              cd /var/www/mercadodeleads
+              git clone git@github.com:Corvaum/mercadodeleads.git .
+            else
+              echo "Repo já existe. Atualizando..."
+              cd /var/www/mercadodeleads
+              git pull origin main
+            fi
+
+            # php scripts (comentados por enquanto)
             # cd /var/www/mercadodeleads
             # composer install --no-dev
             # php artisan migrate --force
