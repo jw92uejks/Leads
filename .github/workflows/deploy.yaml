@@ -23,12 +23,12 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
-          username: git
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             # Cria pasta se não existir
-            mkdir -p /var/www/snakegame
+            mkdir -p /var/www/mercadodeleads
             cd /var/www/snakegame
 
             # Adiciona GitHub ao known_hosts (por segurança)
