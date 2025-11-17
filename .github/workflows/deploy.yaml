@@ -29,7 +29,7 @@ jobs:
           script: |
             # Cria pasta se não existir
             mkdir -p /var/www/mercadodeleads
-            cd /var/www/snakegame
+            cd /var/www/mercadodeleads
 
             # Adiciona GitHub ao known_hosts (por segurança)
             mkdir -p ~/.ssh
@@ -38,7 +38,7 @@ jobs:
             # Se não for um repo git, limpa a pasta e clona
             if [ ! -d ".git" ]; then
               echo "Pasta não existe ou não é um repo git. Limpando e clonando..."
-              rm -rf /var/www/snakegame/*
+              rm -rf /var/www/mercadodeleads/*
               git clone git@github.com:LM-OnDeal/mercadodeleads.git .
             else
               echo "Repo já existe. Atualizando..."
@@ -46,7 +46,7 @@ jobs:
             fi
 
             # Scripts PHP comentados (descomente quando estiver pronto)
-            # cd /var/www/snakegame
+            # cd /var/www/mercadodeleads
             # composer install --no-dev
             # php artisan migrate --force
             # php artisan optimize
