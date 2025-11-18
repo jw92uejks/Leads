@@ -1,0 +1,48 @@
+/* Botões customizados globais */
+:root {
+  --btn-small-font-size: 0.8rem;
+  --btn-small-padding-y: 0.6rem;
+  --btn-small-padding-x: 0.8rem;
+  --btn-small-border-radius: 0.35rem;
+
+  --btn-xs-font-size: 0.6rem;
+  --btn-xs-padding-y: 0.15rem;
+  --btn-xs-padding-x: 0.3rem;
+  --btn-xs-border-radius: 0.35rem;
+}
+
+.btn-small {
+  padding: var(--btn-small-padding-y) var(--btn-small-padding-x) !important;
+  font-size: var(--btn-small-font-size) !important;
+  line-height: 1.25 !important;
+  border-radius: var(--btn-small-border-radius) !important;
+}
+
+.btn-small .spinner-border {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.15em;
+}
+
+.btn-xs {
+  padding: var(--btn-xs-padding-y) var(--btn-xs-padding-x) !important;
+  font-size: var(--btn-xs-font-size) !important;
+  line-height: 1.2 !important;
+  border-radius: var(--btn-xs-border-radius) !important;
+  min-width: 1.75rem;
+  height: 1.75rem;
+}
+
+.btn-xs .spinner-border {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 0.125em;
+}
+
+/* Badge customizado para cor terciária */
+.badge-light-tertiaryc {
+    background-color: #d2e3f3 !important;
+    color: #1187fd !important;
+}
+
+

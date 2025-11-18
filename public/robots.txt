@@ -1,2 +1,20 @@
 User-agent: *
-Disallow:
+Disallow: /
+
+# Bloquear acesso a todas as páginas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /dashboard/
+Disallow: /leads/
+Disallow: /profile/
+Disallow: /settings/
+
+# Bloquear arquivos específicos
+Disallow: /*.php
+Disallow: /*.html
+Disallow: /*.js
+Disallow: /*.css
+
+# Sitemap (opcional - remover se não quiser indexação)
+# Sitemap: https://seudominio.com/sitemap.xml

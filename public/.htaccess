@@ -5,6 +5,52 @@
 
     RewriteEngine On
 
+    # Ocultar completamente informações do servidor
+    <IfModule mod_headers.c>
+        Header unset Server
+        Header unset X-Powered-By
+        Header unset X-AspNet-Version
+        Header unset X-AspNetMvc-Version
+        Header set Server "Ondeal"
+
+        # Ocultar informações do PHP
+        Header unset X-PHP-Version
+
+        # Headers de segurança adicionais
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-Frame-Options "DENY"
+        Header always set X-XSS-Protection "1; mode=block"
+        Header always set Referrer-Policy "no-referrer"
+        Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    </IfModule>
+
+    # Bloquear crawlers e bots (exceto em rotas /api)
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|discordbot|slackbot|crawler|spider|scraper|indexer) [NC]
+    RewriteRule .* - [F,L]
+
+    # Bloquear acesso direto a arquivos sensíveis
+    <Files "*.env">
+        Order allow,deny
+        Deny from all
+    </Files>
+
+    <Files "*.log">
+        Order allow,deny
+        Deny from all
+    </Files>
+
+    # Bloquear acesso a arquivos de configuração
+    <Files "composer.json">
+        Order allow,deny
+        Deny from all
+    </Files>
+
+    <Files "composer.lock">
+        Order allow,deny
+        Deny from all
+    </Files>
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

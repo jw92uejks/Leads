@@ -14,9 +14,22 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->smallInteger('role_id')->default('1');
+            $table->string('ucode')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone', 15)->unique();
+            $table->unsignedTinyInteger('type')->nullable();
+            $table->string('cpf', 11)->nullable();
+            $table->string('cnpj', 14)->nullable();
+            $table->integer('selected_menu')->default(1);
+            $table->string('current_state')->nullable();
+            $table->string('avatar', 255)->default('0')->nullable();
+            $table->string('whatsapp_phone', 20)->nullable();
+            $table->timestamp('whatsapp_verified_at')->nullable();
+            $table->string('device_fingerprint', 255)->nullable();
+            $table->boolean('allow_multiple_devices')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

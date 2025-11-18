@@ -1,0 +1,25 @@
+/* Padronização de todos os itens de menu */
+.menu .menu-item .menu-link .menu-title {
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+}
+
+.menu .menu-item .menu-link {
+    font-weight: 500 !important;
+}
+
+/* Itens de menu accordion (submenus) */
+.menu-item.menu-accordion .menu-link .menu-title {
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+}
+
+.menu-item.menu-accordion .menu-link {
+    font-weight: 500 !important;
+}
+
+/* Subitens de menu */
+.menu .menu-sub .menu-item .menu-link .menu-title {
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+}

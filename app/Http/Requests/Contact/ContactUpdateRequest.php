@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Requests\Contact;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class ContactUpdateRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return auth()->check();
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => 'sometimes|string|max:255',
+            'email' => [
+                'sometimes',
+                'email',
+                'max:255'
+            ],
+            'phone' => 'nullable|string|regex:/^[0-9]+$/|min:9|max:15',
+            'company' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:100',
+            'state' => 'nullable|string|max:100',
+            'cpf' => 'nullable|string|max:14',
+            'cnpj' => 'nullable|string|max:18',
+            'type' => 'nullable|integer|in:1,2,3',
+            'lifes' => 'nullable|integer|min:0',
+            'temperature' => 'nullable|string|in:hot,warm,cold',
+            'startPrice' => 'nullable|numeric|min:0',
+            'currentPrice' => 'nullable|numeric|min:0',
+            'pricingType' => 'nullable|string|in:fixed,monthly,annual',
+            'depreciationPercent' => 'nullable|integer|min:0|max:100',
+            'depreciationInterval' => 'nullable|integer|min:0',
+            'lead_expires_at' => 'nullable|date',
+            'acquired_at' => 'nullable|date',
+            'description' => 'nullable|string|max:1000',
+            'notes' => 'nullable|string|max:1000',
+            'status' => 'sometimes|in:active,inactive,blocked',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.max' => 'O nome não pode ter mais de 255 caracteres',
+            'email.email' => 'O e-mail deve ser válido',
+            'email.max' => 'O e-mail não pode ter mais de 255 caracteres',
+
+            'phone.max' => 'O telefone não pode ter mais de 20 caracteres',
+            'company.max' => 'A empresa não pode ter mais de 255 caracteres',
+            'city.max' => 'A cidade não pode ter mais de 100 caracteres',
+            'state.max' => 'O estado não pode ter mais de 100 caracteres',
+            'cpf.max' => 'O CPF não pode ter mais de 14 caracteres',
+            'cnpj.max' => 'O CNPJ não pode ter mais de 18 caracteres',
+            'type.in' => 'O tipo deve ser 1, 2 ou 3',
+            'lifes.integer' => 'A quantidade de vidas deve ser um número inteiro',
+            'lifes.min' => 'A quantidade de vidas não pode ser negativa',
+            'temperature.in' => 'A temperatura deve ser quente, morno ou frio',
+            'startPrice.numeric' => 'O preço inicial deve ser um número',
+            'startPrice.min' => 'O preço inicial não pode ser negativo',
+            'currentPrice.numeric' => 'O preço atual deve ser um número',
+            'currentPrice.min' => 'O preço atual não pode ser negativo',
+            'pricingType.in' => 'O tipo de precificação deve ser fixo, mensal ou anual',
+            'depreciationPercent.integer' => 'O percentual de depreciação deve ser um número inteiro',
+            'depreciationPercent.min' => 'O percentual de depreciação não pode ser negativo',
+            'depreciationPercent.max' => 'O percentual de depreciação não pode ser maior que 100',
+            'depreciationInterval.integer' => 'O intervalo de depreciação deve ser um número inteiro',
+            'depreciationInterval.min' => 'O intervalo de depreciação não pode ser negativo',
+            'lead_expires_at.date' => 'A data de expiração deve ser uma data válida',
+            'acquired_at.date' => 'A data de aquisição deve ser uma data válida',
+            'description.max' => 'A descrição não pode ter mais de 1000 caracteres',
+            'notes.max' => 'As observações não podem ter mais de 1000 caracteres',
+            'status.in' => 'O status deve ser ativo, inativo ou bloqueado',
+        ];
+    }
+}

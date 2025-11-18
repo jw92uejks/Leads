@@ -15,11 +15,15 @@ return [
     */
 
     'postmark' => [
-        'key' => env('POSTMARK_API_KEY'),
+        'token' => env('POSTMARK_TOKEN'),
+    ],
+
+    'lead_webhook' => [
+        'url' => env('WEBHOOK_LEAD_URL', 'https://cold-jelly-83.webhook.cool'),
     ],
 
     'resend' => [
-        'key' => env('RESEND_API_KEY'),
+        'key' => env('RESEND_KEY'),
     ],
 
     'ses' => [
